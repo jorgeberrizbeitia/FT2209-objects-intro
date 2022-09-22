@@ -1,7 +1,7 @@
 console.log("probando")
 
 
-// HOISTING (solo aplica para var, algo que ocurria con esa palabra)
+// * HOISTING (solo aplica para var y function, algo que ocurria con esa palabra)
 
 // hoisting es la accion en la que JS hace una pre-lectura del codigo
 // buscar todas las variables creadas con var
@@ -62,7 +62,7 @@ console.log( "despues de declarar 2da vez", myFunction() )
 
 
 
-// SCOPES
+// * SCOPES
 
 // cualquier segmento de JS en donde escribimos codigo
 // está definido cada vez que abrimos { } (excepto objetos)
@@ -117,7 +117,7 @@ someString()
 console.log(str3)
 
 
-// CONCLUSIONES
+// * CONCLUSIONES
 
 /* 
 1. siempre declaren sus variables
@@ -129,7 +129,7 @@ console.log(str3)
 
 
 
-// OBJETO
+// * OBJETOS
 
 
 // syntaxis
@@ -195,3 +195,148 @@ for (let key in headPhones) {
   console.log(key)
   console.log(headPhones[key])
 }
+
+
+
+const ironhacker = {
+  firstName: 'marko',
+  age: 39,
+  favoriteLanguage: 'JavaScript',
+  isSatisfied: true,
+  'works at': 'Google',
+  isRemote: false
+}
+
+for (let key in ironhacker) {
+  if (key === "works at") {
+    console.log("si la tiene")
+  }
+}
+
+if (ironhacker["works at"] !== undefined) {
+  console.log("si la tiene")
+}
+
+console.log( ironhacker.hasOwnProperty("works at") )
+if ( ironhacker.hasOwnProperty("works at") === true ) {
+  console.log("si la tiene")
+}
+
+console.log( "patata" in ironhacker )
+if ( "patata" in ironhacker ) {
+  console.log("si la tiene")
+} else {
+  console.log("no la tiene")
+}
+
+
+
+// ESTRUCTURA DE DATA
+
+
+const superheroes = [
+  {
+    name: "Batman",
+    location: "Gotham",
+    superpowers: true, // false
+  },
+  {
+    name: "Superman",
+    location: "Metropolis",
+    superpowers: true,
+  },
+  {
+    name: "Aquaman",
+    location: "Unknown", // "Atlantis"
+    superpowers: true,
+  },
+  {
+    name: "Wonder Woman",
+    location: "Themyscira",
+    superpowers: true,
+  },
+];
+
+console.log( superheroes[0].name )
+console.log( superheroes[0]["name"] )
+// la propiedad name, del primer elemento array
+
+superheroes[0].superpowers = false;
+
+// superheroes[2].location = "Atlantis"
+
+
+for (let i = 0; i < superheroes.length; i++) {
+  console.log( superheroes[i] )
+  if (superheroes[i].name === "Aquaman") {
+    // cambiar location a "Atlantis"
+    superheroes[i].location = "Atlantis"
+  }
+}
+
+let newSuperhero = {
+  name: "Peacemaker",
+  location: "Unknown",
+  superpowers: false,
+}
+
+superheroes.push(newSuperhero)
+
+
+console.log(superheroes)
+
+
+function hasSuperpowers(oneSuperhero) {
+  // let oneSuperhero = {
+  //   name: "Batman",
+  //   location: "Gotham",
+  //   superpowers: true, // false
+  // }
+  if (oneSuperhero.superpowers === true) {
+    return `te tocó: ${oneSuperhero.name}. YAY, tienes suerte`
+  } else {
+    return `te tocó: ${oneSuperhero.name}. meh`
+  }
+}
+
+// console.log( hasSuperpowers(superheroes[0]) )
+
+// quiero ejecutar la funcion por cada elemento del array
+
+for (let i = 0; i < superheroes.length; i++) {
+  // console.log(superheroes[i])
+  let eachSuperhero = superheroes[i]
+  // hasSuperpowers(superheroes[i])
+  
+  // console.log( hasSuperpowers(eachSuperhero) )
+}
+
+// for (let i in superheroes) {
+//   // console.log(superheroes[i])
+//   let eachSuperhero = superheroes[i]
+//   // hasSuperpowers(superheroes[i])
+  
+//   console.log( hasSuperpowers(eachSuperhero) )
+// }
+
+// function que nos de como resultado un superhero aleatorio del array
+
+
+
+// Math.random + Math.floor
+function randomSuperhero(arrayOfHeroes) {
+
+  //                  0 - 0.999999999999
+  let randomNumber = Math.random() * arrayOfHeroes.length // 0 - 4.999999999999
+  let randomPosition = Math.floor(randomNumber)
+  // console.log( randomPosition )
+
+  // arrayOfHeroes[ /* ele indice random */]
+  return arrayOfHeroes[randomPosition]
+
+}
+
+let theRandomSuperhero = randomSuperhero(superheroes)
+console.log( hasSuperpowers(theRandomSuperhero) )
+
+
